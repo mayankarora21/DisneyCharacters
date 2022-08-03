@@ -12,14 +12,25 @@ class DetailsViewController: UIViewController {
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var characterImage: UIImageView!
     
-    var character = Character(name: "", imageURL: "")
-
+    var character: DisneyCharacter?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        nameLabel.text = character.name
-        setImage(url: character.imageURL, imageView: characterImage)
+        nameLabel.text = character!.name
+//        setImage(url: character!.imageURL, imageView: characterImage)
+        if let url = URL(string: character!.imageURL) {
+            characterImage.setImage(url: url, placeholder: nil, cache: nil)
+        }
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        characterImage.layer.borderWidth = 1
+        characterImage.layer.masksToBounds = false
+        characterImage.layer.cornerRadius = characterImage.frame.height/2 //This will change with corners of image and height/2 will make this circle shape
+        characterImage.clipsToBounds = true
     }
     
     func setImage(url: String, imageView: UIImageView) {
@@ -30,10 +41,7 @@ class DetailsViewController: UIViewController {
             guard let imageData = try? Data(contentsOf: imageURL) else { return }
 
             let image = UIImage(data: imageData)
-            imageView.layer.borderWidth = 1
-            imageView.layer.masksToBounds = false
-            imageView.layer.cornerRadius = imageView.frame.height/2 //This will change with corners of image and height/2 will make this circle shape
-            imageView.clipsToBounds = true
+            
             DispatchQueue.main.async {
                 imageView.image = image
             }
