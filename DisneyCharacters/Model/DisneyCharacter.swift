@@ -22,7 +22,7 @@ struct DisneyCharacter: Codable {
     let name: String
     let imageURL: String
     let url: String
-
+    
     enum CodingKeys: String, CodingKey {
         case films, shortFilms, tvShows, videoGames, parkAttractions, allies, enemies
         case id = "_id"
@@ -30,4 +30,15 @@ struct DisneyCharacter: Codable {
         case imageURL = "imageUrl"
         case url
     }
+    
+//    func toDic() -> [String:Any] {
+//        var dict = [String:Any]()
+//        let otherSelf = Mirror(reflecting: self)
+//        for child in otherSelf.children {
+//            if let key = child.label {
+//                dict[key] = child.value
+//            }
+//        }
+//        return dict
+//    }
 }

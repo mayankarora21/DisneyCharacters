@@ -14,16 +14,6 @@ class ViewController: UIViewController {
     
     var selectedRowIndex = 0
     
-//    var characters = [
-//        Character(name: "'Olu Mel", imageURL: "https://static.wikia.nocookie.net/disney/images/6/61/Olu_main.png"),
-//        Character(name: ".GIFfany", imageURL: "https://static.wikia.nocookie.net/disney/images/5/51/Giffany.png"),
-//        Character(name: "9-Eye", imageURL: "https://static.wikia.nocookie.net/disney/images/7/77/9-eye.jpg"),
-//        Character(name: "90's Adventure Bear", imageURL: "https://static.wikia.nocookie.net/disney/images/3/3f/90%27s_Adventure_Bear_profile.png"),
-//        Character(name: "A.B.E.", imageURL: "https://static.wikia.nocookie.net/disney/images/2/20/ABE.jpg"),
-//        Character(name: "A.J. Arno", imageURL: "https://static.wikia.nocookie.net/disney/images/2/2c/A.J._Arno.jpg"),
-//        Character(name: "Abdullah", imageURL: "https://static.wikia.nocookie.net/disney/images/c/cb/1087603-44532-clp-950.jpg")
-//    ]
-    
     var characters = [DisneyCharacter]()
     
 //    override func didReceiveMemoryWarning() {
@@ -37,6 +27,12 @@ class ViewController: UIViewController {
         tableView.dataSource = self
         tableView.delegate = self
         
+        self.title = "Disney Characters"
+        
+        getDisneyCharactersData()
+    }
+    
+    func getDisneyCharactersData(){
         AF.request(disneyCharactersURL)
           .validate()
           .responseDecodable(of: DisneyCharactersResponse.self) { (response) in

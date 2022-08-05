@@ -12,7 +12,15 @@ class DetailsViewController: UIViewController {
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var characterImage: UIImageView!
     
+    @IBOutlet weak var tableView: UITableView!
+    
     var character: DisneyCharacter?
+    
+    
+    var charcterObjectKeys = [String]()
+    var charcterObjectValues = [String]()
+    
+//    var mediaTypeArray: [MediaType] = [.films, .shortFilms, .tvShows, .videoGames, .parkAttractions, .allies, .enemies]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,6 +31,20 @@ class DetailsViewController: UIViewController {
         if let url = URL(string: character!.imageURL) {
             characterImage.setImage(url: url, placeholder: nil, cache: nil)
         }
+        tableView.dataSource = self
+        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "Cell")
+        
+        charcterObjectKeys = ["Films", "Short Films", "TV Shows", "Video Games", "Park Attractions", "Allies", "Enemies"]
+        charcterObjectValues = [
+            (character!.films.isEmpty ? "No Films" : character!.films.joined(separator: ", ")),
+            (character!.shortFilms.isEmpty ? "No Short Films" : character!.shortFilms.joined(separator: ", ")),
+            (character!.tvShows.isEmpty ? "No TV Shows" : character!.tvShows.joined(separator: ", ")),
+            (character!.videoGames.isEmpty ? "No Video Games" : character!.videoGames.joined(separator: ", ")),
+            (character!.parkAttractions.isEmpty ? "No Park Attractions" : character!.parkAttractions.joined(separator: ", ")),
+            (character!.allies.isEmpty ? "No Allies" : character!.allies.joined(separator: ", ")),
+            (character!.enemies.isEmpty ? "No Enemies" : character!.enemies.joined(separator: ", "))
+        ]
+        
     }
     
     override func viewDidLayoutSubviews() {
@@ -48,14 +70,19 @@ class DetailsViewController: UIViewController {
         }
     }
 
-    /*
-    // MARK: - Navigation
+}
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+extension DetailsViewController: UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+//        return mediaTypeArray.count
+        return 7
     }
-    */
-
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let currCell: UITableViewCell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
+        let currCellContent = "\(charcterObjectKeys[indexPath.row]):  \(charcterObjectValues[indexPath.row])"
+        currCell.textLabel?.text = currCellContent
+        currCell.textLabel?.numberOfLines = 0
+        return currCell
+    }
 }
