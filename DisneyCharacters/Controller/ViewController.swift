@@ -13,8 +13,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     
     var selectedRowIndex = 0
-    
-    var characters = [DisneyCharacter]()
+    var disneyCharactersViewModel = DisneyCharactersViewModel()
     
 //    override func didReceiveMemoryWarning() {
 //        super.didReceiveMemoryWarning()
@@ -32,27 +31,19 @@ class ViewController: UIViewController {
         getDisneyCharactersData()
     }
     
-    func getDisneyCharactersData(){
-        AF.request(disneyCharactersURL)
-          .validate()
-          .responseDecodable(of: DisneyCharactersResponse.self) { (response) in
-            print("response is \(response)")
-            guard let disneyCharactersResponse = response.value else { return }
-              self.characters = disneyCharactersResponse.disneyCharacters
-              self.tableView.reloadData()
-          }
-        
-//        let request = AF.request(disneyCharactersURL)
-//        request.responseJSON { (data) in
-//            print(data)
-//        }
+    func getDisneyCharactersData(){        
+        disneyCharactersViewModel.reloadTable = {
+            [weak self] in
+            self?.tableView.reloadData()
+        }
+        disneyCharactersViewModel.getDisneyCharactersData()
     }
 }
 
 extension ViewController: UITableViewDataSource, UITableViewDelegate{
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        characters.count
+        disneyCharactersViewModel.characters.count
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -62,7 +53,7 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate{
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let currCell = tableView.dequeueReusableCell(withIdentifier: "CharacterCell", for: indexPath) as! CharacterCell
-        currCell.character = characters[indexPath.row]
+        currCell.character = disneyCharactersViewModel.characters[indexPath.row]
         currCell.loadCell()
         
 //        if indexPath.row % 2 == 0 {
@@ -81,7 +72,7 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate{
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "navigateToDetails" {
             let destinationVC = segue.destination as! DetailsViewController
-            destinationVC.character = characters[selectedRowIndex]
+            destinationVC.character = disneyCharactersViewModel.characters[selectedRowIndex]
         }
     }
 }
