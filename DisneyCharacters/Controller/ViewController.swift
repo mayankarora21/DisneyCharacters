@@ -55,10 +55,6 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate{
         let currCell = tableView.dequeueReusableCell(withIdentifier: "CharacterCell", for: indexPath) as! CharacterCell
         currCell.character = disneyCharactersViewModel.characters[indexPath.row]
         currCell.loadCell()
-        
-//        if indexPath.row % 2 == 0 {
-//            currCell.label.text = "hello world ashdkdsljaldowd.asmsalkdakdoipuoijpoksd;lasd,;l'l'las;l,x;amkd;kd;la'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
-//        }
         return currCell
     }
     
