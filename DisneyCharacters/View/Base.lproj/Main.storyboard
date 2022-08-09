@@ -48,11 +48,11 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="vND-Jg-Mc7">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="vND-Jg-Mc7">
                                 <rect key="frame" x="107" y="148" width="200" height="200"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="200" id="QHJ-dD-KhZ"/>
-                                    <constraint firstAttribute="height" constant="200" id="kxa-Et-EFN"/>
+                                    <constraint firstAttribute="width" secondItem="vND-Jg-Mc7" secondAttribute="height" multiplier="1:1" id="Xae-6Z-0t7"/>
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="n7H-zK-Pr0">
