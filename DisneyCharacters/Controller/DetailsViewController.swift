@@ -30,6 +30,7 @@ class DetailsViewController: UIViewController {
             characterImage.setImage(url: url, placeholder: nil, cache: nil)
         }
         tableView.dataSource = self
+        tableView.delegate = self
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "Cell")
         
         charcterObjectKeys = ["Films", "Short Films", "TV Shows", "Video Games", "Park Attractions", "Allies", "Enemies"]
@@ -55,7 +56,7 @@ class DetailsViewController: UIViewController {
 
 }
 
-extension DetailsViewController: UITableViewDataSource {
+extension DetailsViewController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 7
     }
@@ -66,5 +67,9 @@ extension DetailsViewController: UITableViewDataSource {
         currCell.textLabel?.text = currCellContent
         currCell.textLabel?.numberOfLines = 0
         return currCell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
     }
 }

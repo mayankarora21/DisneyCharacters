@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import Alamofire
 
 class ViewController: UIViewController {
 
@@ -31,7 +30,7 @@ class ViewController: UIViewController {
         getDisneyCharactersData()
     }
     
-    func getDisneyCharactersData(){        
+    func getDisneyCharactersData(){
         disneyCharactersViewModel.reloadTable = {
             [weak self] in
             self?.tableView.reloadData()
@@ -48,7 +47,7 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate{
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
 //        return UITableView.automaticDimension
-        return 100.0
+        return 120.0
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
