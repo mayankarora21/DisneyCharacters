@@ -16,22 +16,37 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="QOT-Nx-oCz">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="862"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                            </tableView>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="6hA-XE-qKB">
+                                <rect key="frame" x="0.0" y="88" width="414" height="774"/>
+                                <subviews>
+                                    <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Search" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="hvn-qi-zm6">
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="82"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                        <textInputTraits key="textInputTraits" returnKeyType="done"/>
+                                        <connections>
+                                            <action selector="searchDone:" destination="BYZ-38-t0r" eventType="primaryActionTriggered" id="wYR-he-YqL"/>
+                                            <action selector="searchFieldChanged:" destination="BYZ-38-t0r" eventType="editingChanged" id="Zkt-ck-Ozk"/>
+                                        </connections>
+                                    </textField>
+                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="QOT-Nx-oCz">
+                                        <rect key="frame" x="0.0" y="92" width="414" height="682"/>
+                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                    </tableView>
+                                </subviews>
+                            </stackView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="QOT-Nx-oCz" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="U20-Yb-GT0"/>
-                            <constraint firstItem="QOT-Nx-oCz" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="YSS-yf-8db"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="QOT-Nx-oCz" secondAttribute="bottom" id="plU-H2-QMn"/>
-                            <constraint firstItem="QOT-Nx-oCz" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="wjT-x4-fYy"/>
+                            <constraint firstItem="6hA-XE-qKB" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="DIr-y8-GwM"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="6hA-XE-qKB" secondAttribute="bottom" id="ELw-Qm-GLt"/>
+                            <constraint firstItem="6hA-XE-qKB" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="PZM-tZ-FY9"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="6hA-XE-qKB" secondAttribute="trailing" id="UIs-80-DmC"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="MIf-7A-iDB"/>
                     <connections>
+                        <outlet property="searchField" destination="hvn-qi-zm6" id="z3D-v3-0no"/>
                         <outlet property="tableView" destination="QOT-Nx-oCz" id="jtr-nB-Ef1"/>
                         <segue destination="ImT-fd-ssG" kind="show" identifier="navigateToDetails" id="SaJ-B4-9xq"/>
                     </connections>

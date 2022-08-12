@@ -33,5 +33,18 @@ class DisneyCharactersViewModelTests: XCTestCase {
         
         XCTAssertEqual(disneyCharactersViewModel.characters.count, 50)
     }
-
+    
+    func test_filterCharactersWithEmptySearchString(){
+        let disneyCharactersViewModel = DisneyCharactersViewModel()
+        
+        disneyCharactersViewModel.filterCharacters(searchString: "")
+        XCTAssertEqual(0, disneyCharactersViewModel.filteredCharacters.count)
+    }
+    
+    func test_filterCharactersWithNonEmptySearchString(){
+        let disneyCharactersViewModel = DisneyCharactersViewModel()
+        disneyCharactersViewModel.filterCharacters(searchString: "a")
+        XCTAssertTrue(disneyCharactersViewModel.filteredCharacters.isEmpty)
+    }
+    
 }

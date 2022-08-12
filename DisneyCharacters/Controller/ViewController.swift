@@ -14,7 +14,8 @@ class ViewController: UIViewController {
     var selectedRowIndex = 0
     var disneyCharactersViewModel = DisneyCharactersViewModel()
     
-//    override func didReceiveMemoryWarning() {
+    @IBOutlet weak var searchField: UITextField!
+    //    override func didReceiveMemoryWarning() {
 //        super.didReceiveMemoryWarning()
 //    }
     
@@ -37,12 +38,20 @@ class ViewController: UIViewController {
         }
         disneyCharactersViewModel.getDisneyCharactersData()
     }
+    
+    @IBAction func searchFieldChanged(_ sender: UITextField) {
+        disneyCharactersViewModel.filterCharacters(searchString: sender.text?.lowercased() ?? "")
+    }
+    
+    @IBAction func searchDone(_ sender: UITextField) {
+        sender.resignFirstResponder()
+    }
 }
 
 extension ViewController: UITableViewDataSource, UITableViewDelegate{
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        disneyCharactersViewModel.characters.count
+        disneyCharactersViewModel.filteredCharacters.count
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -52,7 +61,7 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate{
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let currCell = tableView.dequeueReusableCell(withIdentifier: "CharacterCell", for: indexPath) as! CharacterCell
-        currCell.character = disneyCharactersViewModel.characters[indexPath.row]
+        currCell.character = disneyCharactersViewModel.filteredCharacters[indexPath.row]
         currCell.loadCell()
         return currCell
     }
@@ -67,7 +76,7 @@ extension ViewController: UITableViewDataSource, UITableViewDelegate{
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "navigateToDetails" {
             let destinationVC = segue.destination as! DetailsViewController
-            destinationVC.character = disneyCharactersViewModel.characters[selectedRowIndex]
+            destinationVC.character = disneyCharactersViewModel.filteredCharacters[selectedRowIndex]
         }
     }
 }
